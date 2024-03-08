@@ -4,7 +4,6 @@ import numpy as np
 from scipy.stats import t, norm, kurtosis
 from numpy.linalg import eigh
 from numpy.random import default_rng
-from scipy.linalg import eigh
 from scipy import stats
 from scipy.integrate import quad
 from scipy.stats import spearmanr
@@ -875,7 +874,7 @@ def aggRisk(values, group_by_columns):
         metrics['Stock'] = name
         risk_metrics_data.append(metrics)
     
-    total_val = values['currentValue'].sum()
+    total_val = values['currentValue'].sum()/100000
     total_pnl = values.groupby('iteration')['pnl'].sum().reset_index(name='pnl')
     total_metrics = calculate_metrics(total_pnl, is_total=True, total_val=total_val)
     total_metrics['Stock']='Total'
